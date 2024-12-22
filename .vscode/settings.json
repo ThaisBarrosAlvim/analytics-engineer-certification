@@ -1,0 +1,5 @@
+{
+    "dbt.dbtIntegration": "core",
+    "dbt.queryLimit": 50,
+    "dbt.enableNewLineagePanel": true
+}

@@ -1,0 +1,258 @@
+version: 2
+
+sources:
+  - name: erp
+    description: "Adventure Works Sales System"
+    schema: raw_adventure_works
+    database: FEA24_11
+    tables:
+      - name: salesorderheader
+        description: "Table containing sales order headers, including customer details, dates, status, and total amounts."
+        columns:
+          - name: salesorderid
+            description: "Unique identifier for each sales order."
+            tests:
+              - not_null
+              - unique
+          - name: customerid
+            description: "Foreign key referencing the Customer table."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+          - name: orderdate
+            description: "Date when the order was placed."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+          - name: totaldue
+            description: "Total amount due for the customer."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  inclusive: true
+                  config:
+                    severity: error
+                    error_if: ">100"
+
+      - name: salesorderdetail
+        description: "Table containing sales order details, including products, quantities, prices, and discounts."
+        columns:
+          - name: salesorderdetailsid
+            description: "Unique identifier for each sales order details."
+            tests:
+              - not_null
+              - unique        
+          - name: salesorderid
+            description: "Foreign key referencing SalesOrderHeader."
+            tests:
+              - not_null
+          - name: productid
+            description: "Foreign key referencing the Product table."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+          - name: orderqty
+            description: "Number of units of the product in the order."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+              - dbt_utils.accepted_range:
+                  min_value: 1
+                  inclusive: true
+                  config:
+                    severity: error
+                    error_if: ">100"
+          - name: unitprice
+            description: "Unit price of the product."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  inclusive: true
+                  config:
+                    severity: error
+                    error_if: ">100"
+
+      - name: product
+        description: "Table containing information about available products."
+        columns:
+          - name: productid
+            description: "Unique identifier for each product."
+            tests:
+              - not_null
+              - unique
+          - name: name
+            description: "Name of the product."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+          - name: listprice
+            description: "List price of the product."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">1000"
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  inclusive: true
+                  config:
+                    severity: error
+                    error_if: ">50"
+
+      - name: customer
+        description: "Table containing customer information, linked to either the Person or Store table."
+        columns:
+          - name: customerid
+            description: "Unique identifier for each customer."
+            tests:
+              - not_null
+              - unique
+
+      - name: person
+        description: "Table containing information about individual customers or employees."
+        columns:
+          - name: businessentityid
+            description: "Unique identifier for each person."
+            tests:
+              - not_null
+              - unique
+          - name: firstname
+            description: "First name of the person."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+
+      - name: store
+        description: "Table containing information about stores associated with customers."
+        columns:
+          - name: businessentityid
+            description: "Unique identifier for each store."
+            tests:
+              - not_null
+              - unique
+          - name: name
+            description: "Name of the store."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+
+      - name: creditcard
+        description: "Table containing information about credit cards used in orders."
+        columns:
+          - name: creditcardid
+            description: "Unique identifier for each credit card."
+            tests:
+              - not_null
+              - unique
+          - name: cardtype
+            description: "Type of the credit card, such as Visa or MasterCard."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+
+      - name: address
+        description: "Table containing information about addresses."
+        columns:
+          - name: addressid
+            description: "Unique identifier for each address."
+            tests:
+              - not_null
+              - unique
+          - name: city
+            description: "City of the address."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+          - name: stateprovinceid
+            description: "Foreign key referencing StateProvince."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+
+      - name: stateprovince
+        description: "Table containing information about states or provinces."
+        columns:
+          - name: stateprovinceid
+            description: "Unique identifier for each state or province."
+            tests:
+              - not_null
+              - unique
+          - name: name
+            description: "Name of the state or province."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+
+      - name: countryregion
+        description: "Table containing information about countries and regions."
+        columns:
+          - name: countryregioncode
+            description: "Unique code for each country or region."
+            tests:
+              - not_null
+              - unique
+          - name: name
+            description: "Name of the country or region."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
+
+      - name: salesorderheadersalesreason
+        description: "Join table linking sales orders to sales reasons."
+        columns:
+          - name: salesorderid
+            description: "Foreign key referencing SalesOrderHeader."
+            tests:
+              - not_null
+          - name: salesreasonid
+            description: "Foreign key referencing SalesReason."
+            tests:
+              - not_null
+
+      - name: salesreason
+        description: "Table containing information about sales reasons."
+        columns:
+          - name: salesreasonid
+            description: "Unique identifier for each sales reason."
+            tests:
+              - not_null
+              - unique
+          - name: name
+            description: "Name of the sales reason."
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">100"
