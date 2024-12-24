@@ -45,7 +45,7 @@ sources:
       - name: salesorderdetail
         description: "Table containing sales order details, including products, quantities, prices, and discounts."
         columns:
-          - name: salesorderdetailsid
+          - name: salesorderdetailid
             description: "Unique identifier for each sales order details."
             tests:
               - not_null

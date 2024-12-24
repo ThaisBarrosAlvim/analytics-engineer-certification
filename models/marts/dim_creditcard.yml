@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: dim_creditcard
+    description: This model created dim credit card.
+
+    columns:
+      - name: pk_credit_card
+        description: Primary key that uniquely identifies each credit card in the dataset.
+
+      - name: card_type
+        description: The type of credit card, such as 'Vista', 'SuperiorCard', 'Distinguish', etc.

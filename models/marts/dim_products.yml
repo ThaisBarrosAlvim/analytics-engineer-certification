@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_product
+    description: >
+      This model curates and transforms raw product data from the Adventure Works
+      database (specifically from the `raw_adventure_works` schema) to build the
+      **Dim Product**. It consolidates essential product attributes (cost,
+      price, names, and codes) for analytics and reporting.
+
+    columns:
+      - name: pk_product
+        description: Primary key that uniquely identifies each product.
+       
+
+      - name: standard_cost
+        description: The base manufacturing or acquisition cost of the product.
+        
+
+      - name: list_price
+        description: The recommended selling price for the product in standard currency units.
+        
+
+      - name: name
+        description: The descriptive name of the product, as used in customer-facing materials.
+        
+
+      - name: product_number
+        description: An internal code (SKU or reference number) used to identify the product in internal systems.
+       

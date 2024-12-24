@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: >
+      This model creates the `dim_customer` table by integrating data from `Store`, 
+      `Person`, and `Customer`. It prioritizes the `Store` 
+      when available; otherwise, it uses the full name of the associated person.
+      The model ensures a clean and consolidated view of customers for analytical purposes.
+
+    columns:
+      - name: pk_customer
+        description: Primary key that uniquely identifies each customer.
+
+      - name: name_customer
+        description: >
+          The name of the customer, derived either from the store name (`store.name_store`)
+          or, if unavailable, from the concatenation of the person's first, middle (if present),
+          and last name.
