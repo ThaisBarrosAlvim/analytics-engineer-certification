@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_sales__prep_customer
+    description: >
+      This model creates the `enrich_customer` table by integrating data from `stg_erp__store`, 
+      `stg_erp__person`, and `stg_erp__customer`. It prioritizes the `store.name_store` 
+      when available; otherwise, it uses the full name of the associated person.
+      The model ensures a clean and consolidated view of customers for analytical purposes.
+
+    columns:
+      - name: pk_customer
+        description: >
+          Primary key that uniquely identifies each customer.
+        tests:
+          - unique
+          - not_null
+
+      - name: name_customer
+        description: >
+          The name of the customer, derived either from the store name (`store.name_store`)
+          or, if unavailable, from the concatenation of the person's first, middle (if present),
+          and last name.
+        tests:
+          - not_null

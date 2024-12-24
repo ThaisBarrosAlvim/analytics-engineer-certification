@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: int_sales__prep_creditcard
+    description: This model enriches credit card data keeping card_type.
+
+    columns:
+      - name: pk_credit_card
+        description: Primary key that uniquely identifies each credit card in the dataset.
+        tests:
+          - unique
+          - not_null
+
+      - name: card_type
+        description: The type of credit card, such as 'Vista', 'SuperiorCard', 'Distinguish', etc.
+        tests:
+          - not_null

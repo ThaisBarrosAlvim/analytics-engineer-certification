@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: int_sales__prep_address
+    description: >
+      This model consolidates address-related data by integrating details from 
+      the `stg_erp__address`, `stg_erp__stateprovince`, and `stg_erp__countryregion` tables.
+
+    columns:
+      - name: pk_address
+        description: Primary key that uniquely identifies each address.
+        tests:
+          - unique
+          - not_null
+
+      - name: city
+        description: Name of the city where the address is located.
+        tests:
+          - not_null
+
+      - name: state_province_name
+        description: Name of the state or province associated with the address.
+        tests:
+          - not_null
+
+      - name: state_province_code
+        description: Abbreviation or code representing the state or province.
+        tests:
+          - not_null
+
+      - name: country_region_name
+        description: Full name of the country or region associated with the address.
+        tests:
+          - not_null
+
+      - name: country_region_code
+        description: Abbreviation or code representing the country or region.
+        tests:
+          - not_null

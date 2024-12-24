@@ -1,0 +1,102 @@
+version: 2
+
+models:
+  - name: int_sales__prep_salesorderdetail
+    description: >
+      Enriched table that consolidates granular sales order details (`salesorderdetail`) 
+      with aggregated sales order information (`salesorderheader`).
+
+    columns:
+      - name: pk_sales_order_detail
+        description: Primary key that uniquely identifies each sales order detail record.
+        tests:
+          - unique
+          - not_null
+
+      - name: sales_order_header_number
+        description: >
+         Foreign key linking to the sales order header. Represents the order to which this detail belongs.
+        tests:
+          - not_null
+
+      - name: fk_product
+        description: Foreign key linking to the product table. Identifies the product in this detail record.
+        tests:
+          - not_null
+
+      - name: order_quantity
+        description: Quantity of the product ordered in this detail record.
+        tests:
+          - not_null
+
+      - name: unit_price
+        description: Price per unit of the product in this detail record.
+        tests:
+          - not_null
+
+      - name: unit_price_discount
+        description: Discount applied to the unit price of the product.
+        tests:
+          - not_null
+
+      - name: date_order
+        description: Date when the sales order was created.
+        tests:
+          - not_null
+
+      - name: date_due
+        description: Date when the sales order was due.
+        tests:
+          - not_null
+
+      - name: date_ship
+        description: Date when the sales order was shipped.
+        tests:
+          - not_null
+
+      - name: fk_customer
+        description: >
+         Foreign key linking to the customer table. Identifies the customer who placed the order.
+        tests:
+          - not_null
+
+      - name: fk_billto_address
+        description: Foreign key linking to the address table. Represents the billing address for the order.
+        tests:
+          - not_null
+
+      - name: fk_shipto_address
+        description: >
+         Foreign key linking to the address table. Represents the shipping address for the order.
+        tests:
+          - not_null
+
+      - name: subtotal
+        description: Total amount before taxes and freight for the order.
+        tests:
+          - not_null
+
+      - name: tax_amount
+        description: Amount of taxes applied to the order.
+        tests:
+          - not_null
+
+      - name: freight
+        description: Freight cost for the order.
+        tests:
+          - not_null
+
+      - name: total_due
+        description: Total amount due for the order, including taxes and freight.
+        tests:
+          - not_null
+
+      - name: revision_number
+        description: Revision number of the order, indicating updates or changes made.
+        tests:
+          - not_null
+
+      - name: status
+        description: Status code of the order (e.g., open, closed, etc.).
+        tests:
+          - not_null

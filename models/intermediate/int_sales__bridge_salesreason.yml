@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: int_sales__bridge_salesreason
+    description: >
+      Bridge table linking sales orders with sales reasons. Each row represents 
+      a relationship between a sales order and a sales reason, allowing for analysis 
+      of sales by reasons with a many-to-many relationship.
+    columns:
+      - name: sales_order_id
+        description: >
+          The identifier of the sales order, as sourced from the transactional system.
+          Used to link the bridge table with the fact table of sales or orders.
+        tests:
+          - not_null
+      - name: sales_reason_key
+        description: >
+          The surrogate key of the sales reason, sourced from the dim_sales_reason table.
+          Used to link the bridge table with the dimension table of sales reasons.
+        tests:
+          - not_null

@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: int_sales__prep_salesreason
+    description: >
+      View representing sales reasons. 
+      Each row corresponds to a unique sales reason, including its surrogate key,
+      name, and type (e.g., Marketing, Promotion).
+    columns:
+      - name: sales_reason_key
+        description: Surrogate key uniquely identifying the sales reason.
+        tests:
+          - not_null
+          - unique
+      - name: pk_sales_reason
+        description: Natural key for the sales reason, directly sourced from the transactional system.
+        tests:
+          - not_null
+          - unique
+      - name: name_sales_reason
+        description: The name of the sales reason (e.g., "Marketing Campaign").
+        tests:
+          - not_null
+      - name: reason_type
+        description: The type or category of the sales reason (e.g., "Marketing", "Promotion").
+        tests:
+          - not_null
+      - name: created_at
+        description: Timestamp indicating when the record was created in the data warehouse.
