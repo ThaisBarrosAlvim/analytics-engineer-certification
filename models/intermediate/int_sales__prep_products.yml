@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: int_sales__prep_products
+    description: >
+      This model curates and transforms raw product data from the Adventure Works
+      database (specifically from the `raw_adventure_works` schema) to build the
+      **Enrich Product**. It consolidates essential product attributes (cost,
+      price, names, and codes) for analytics and reporting.
+
+    columns:
+      - name: pk_product
+        description: Primary key that uniquely identifies each product.
+        tests:
+          - unique       
+          - not_null     
+
+      - name: standard_cost
+        description: The base manufacturing or acquisition cost of the product.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+              config:
+                severity: error
+                error_if: ">100" 
+
+      - name: list_price
+        description: The recommended selling price for the product in standard currency units.
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
+              config:
+                severity: error
+                error_if: ">100"  
+
+      - name: name
+        description: The descriptive name of the product, as used in customer-facing materials.
+        tests:
+          - not_null     
+
+      - name: product_number
+        description: An internal code (SKU or reference number) used to identify the product in internal systems.
+        tests:
+          - not_null
+          - unique
