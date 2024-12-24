@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_address
+    description: >
+      This model consolidates address-related data by integrating details from 
+      the `Address`, `StateProvince`, and `CountryRegion` tables.
+
+    columns:
+      - name: pk_address
+        description: Primary key that uniquely identifies each address.
+
+      - name: city
+        description: Name of the city where the address is located.
+
+      - name: state_province_name
+        description: Name of the state or province associated with the address.
+
+      - name: state_province_code
+        description: Abbreviation or code representing the state or province.
+
+      - name: country_region_name
+        description: Full name of the country or region associated with the address.
+
+      - name: country_region_code
+        description: Abbreviation or code representing the country or region.
