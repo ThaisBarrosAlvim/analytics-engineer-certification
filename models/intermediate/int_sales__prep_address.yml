@@ -18,7 +18,7 @@ models:
         tests:
           - not_null
 
-      - name: state_province_name
+      - name: name_state_province
         description: Name of the state or province associated with the address.
         tests:
           - not_null
@@ -28,7 +28,7 @@ models:
         tests:
           - not_null
 
-      - name: country_region_name
+      - name: name_country_region
         description: Full name of the country or region associated with the address.
         tests:
           - not_null

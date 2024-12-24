@@ -37,7 +37,7 @@ models:
                 severity: error
                 error_if: ">100"  
 
-      - name: name
+      - name: name_product
         description: The descriptive name of the product, as used in customer-facing materials.
         tests:
           - not_null     

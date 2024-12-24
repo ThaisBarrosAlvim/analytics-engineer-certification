@@ -13,13 +13,13 @@ models:
       - name: city
         description: Name of the city where the address is located.
 
-      - name: state_province_name
+      - name: name_state_province
         description: Name of the state or province associated with the address.
 
       - name: state_province_code
         description: Abbreviation or code representing the state or province.
 
-      - name: country_region_name
+      - name: name_country_region
         description: Full name of the country or region associated with the address.
 
       - name: country_region_code

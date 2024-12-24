@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: int_sales__prep_customer
+  - name: dim_customer
     description: >
       This model creates the `dim_customer` table by integrating data from `Store`, 
       `Person`, and `Customer`. It prioritizes the `Store` 

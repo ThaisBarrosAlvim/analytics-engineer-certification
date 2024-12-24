@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: int_sales__prep_salesreason
+  - name: dim_salesreason
     description: >
       View representing sales reasons Dimension. 
       Each row corresponds to a unique sales reason, including its surrogate key,
