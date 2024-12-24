@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: int_sales__prep_products
+  - name: int_sales__prep_product
     description: >
       This model curates and transforms raw product data from the Adventure Works
       database (specifically from the `raw_adventure_works` schema) to build the

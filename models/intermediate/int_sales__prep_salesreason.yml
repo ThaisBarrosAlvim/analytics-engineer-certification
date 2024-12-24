@@ -25,5 +25,3 @@ models:
         description: The type or category of the sales reason (e.g., "Marketing", "Promotion").
         tests:
           - not_null
-      - name: created_at
-        description: Timestamp indicating when the record was created in the data warehouse.
