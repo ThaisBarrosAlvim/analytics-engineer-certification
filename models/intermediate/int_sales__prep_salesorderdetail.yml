@@ -24,6 +24,26 @@ models:
         tests:
           - not_null
 
+      - name: extended_amount
+        description: Total value for the item line, calculated as (order_quantity * unit_price) - (order_quantity * unit_price_discount).
+        tests:
+          - not_null
+
+      - name: net_amount
+        description: Final value for the item line, including taxes and freight (extended_amount + tax_amount + freight).
+        tests:
+          - not_null
+
+      - name: total_discount
+        description: Total discount applied to the item line, calculated as (order_quantity * unit_price_discount).
+        tests:
+          - not_null
+
+      - name: has_discount
+        description: Boolean indicating if the item line has a discount (true if unit_price_discount > 0, else false).
+        tests:
+          - not_null
+
       - name: order_quantity
         description: Quantity of the product ordered in this detail record.
         tests:
