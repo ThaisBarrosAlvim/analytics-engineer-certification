@@ -27,7 +27,26 @@ with
             header.freight,
             header.total_due,
             header.revision_number,
-            header.status
+            header.status,
+
+            -- Extended order value (Gross total)
+            (detail.order_quantity * detail.unit_price) - 
+            (detail.order_quantity * detail.unit_price_discount) as extended_amount,
+
+            -- Net Amount (ExtendedAmount + tax_amount & freight)
+            ((detail.order_quantity * detail.unit_price) - 
+            (detail.order_quantity * detail.unit_price_discount)) 
+            + header.tax_amount + header.freight as net_amount,
+
+            -- Total discount per item
+            (detail.order_quantity * detail.unit_price_discount) as total_discount,
+
+            -- Has discount
+            case 
+                when detail.unit_price_discount > 0 then true 
+                else false 
+            end as has_discount
+
         from sales_order_detail detail
         left join sales_order_header header
             on detail.fk_sales_order = header.pk_sales_order
