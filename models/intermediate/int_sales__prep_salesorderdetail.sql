@@ -30,12 +30,10 @@ with
             header.status,
 
             -- Extended order value (Gross total)
-            (detail.order_quantity * detail.unit_price) - 
-            (detail.order_quantity * detail.unit_price_discount) as extended_amount,
+            (detail.order_quantity * detail.unit_price) as extended_amount,
 
             -- Net Amount (ExtendedAmount + tax_amount & freight)
-            ((detail.order_quantity * detail.unit_price) - 
-            (detail.order_quantity * detail.unit_price_discount)) 
+            (detail.order_quantity * detail.unit_price) 
             + header.tax_amount + header.freight as net_amount,
 
             -- Total discount per item
