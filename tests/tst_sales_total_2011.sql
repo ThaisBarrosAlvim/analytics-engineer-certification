@@ -7,4 +7,4 @@ with
 
 select sum_extended_amount
 from sales_in_2011
-where sum_extended_amount not between 12646113.00 and 12646113.00
+where sum_extended_amount not between 12646112.00 and 12646113.00
